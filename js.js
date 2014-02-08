@@ -9,7 +9,7 @@ $(function(){
 	}
 	birdFall = false;
 	passby = 0;
-	best = 0;
+	best = window.localStorage.best || 0;
 	var gameOverMark = false;
 	window.t = 0;
 	var mainTime = false;
@@ -39,7 +39,6 @@ $(function(){
 			passby = 0;
 		}else{
 			passby++;
-			best = passby;
 		}
 		$('#counter').text(passby);
 	}
@@ -66,6 +65,10 @@ $(function(){
 		clearTimeout(mainTime);
 		clearTimeout(birdFall);
 		gameOverMark = true;
+		if (passby > best){
+			best = passby;
+			window.localStorage.best = best;
+		}
 		$('#thisTime').text(passby);
 		$('#theBest').text(best);
 		$gameover.show();

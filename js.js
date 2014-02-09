@@ -1,10 +1,10 @@
 $(function(){
 	var st = {
-		treeSpeed:4,
-		mainTimeLineInterval:30,
-		creatTreeInterval:60,
-		treeWidth:100,
-		treeHeightDiffLimit:30
+		treeSpeed:4,               //障碍(我觉得是树。)移动速度单位 px/帧
+		mainTimeLineInterval:30,   //主时间轴速度  单位 ms/帧
+		creatTreeInterval:60,      //创建障碍的间隔 单位 ms
+		treeWidth:100,             //树宽  单位 px
+		treeHeightDiffLimit:30     //障碍缺口的高度变化限制 单位 屏幕高度%
 	}
 	var $start = $('#start').show();
 	var $gameover = $('#gameover').hide();

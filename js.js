@@ -149,5 +149,12 @@ $(function(){
 		}
 	}).on('resize',function(){
 		setWindow();
+	}).on('tap',function(){
+		if( !gameOverMark ){
+			gameStart();
+			resetBirdSpeed();
+		}
+	}).on('longTap',function(){
+		resetAll();
 	});
 });

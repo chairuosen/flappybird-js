@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script src="jquery.min.js"></script>
 <meta charset=utf-8 />
 <title>BIRD</title>
 <link rel="stylesheet" href="normalize.css">
 <link rel="stylesheet" href="style.css">
-<script src='js.js'></script>
+<script src="zepto.min.js"></script>
+<!--[if lt IE 9]>
+<script src="jquery.min.js"></script>
+<![endif]-->
+<script src='js.js?v=1'></script>
 </head>
 <body>
 	<section id="background" >
@@ -21,7 +24,7 @@
 		<div id="start">Tap Space to Start!</div>
 		<div id="gameover">
 			<h1>Game Over!</h1>
-			<p>Esc重新玩</p>
+			<p>Esc重新玩/移动端长按屏幕</p>
 			<p>当前成绩：<span id='thisTime'></span>
 			</p>
 			<p>最好成绩：<span id='theBest'></span></p>

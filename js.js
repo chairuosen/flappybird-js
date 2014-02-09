@@ -1,15 +1,18 @@
 $(function(){
-	var $start = $('#start').show();
-	var $gameover = $('#gameover').hide();
 	var st = {
 		treeSpeed:4,
 		mainTimeLineInterval:30,
 		creatTreeInterval:60,
-		treeWidth:100
+		treeWidth:100,
+		treeHeightParam:30
 	}
-	birdFall = false;
-	passby = 0;
-	best = window.localStorage.best || 0;
+	var $start = $('#start').show();
+	var $gameover = $('#gameover').hide();
+	var lastTreePos;
+	var birdFall = false;
+	var passby = 0;
+
+	var best = window.localStorage.best || 0;
 	var gameOverMark = false;
 	window.t = 0;
 	var mainTime = false;
@@ -117,12 +120,19 @@ $(function(){
 		});
 	};
 	var creatTree = function(){
-		var r = parseInt(Math.random()*80);
-		var percent = -(r+10)+"%";
+		var r = parseInt(Math.random()*80) + 10;
+		if(!!lastTreePos){
+			if( r > lastTreePos + st.treeHeightParam )
+				r = lastTreePos + st.treeHeightParam;
+			if( r < lastTreePos - st.treeHeightParam )
+				r = lastTreePos - st.treeHeightParam;
+		}
+		var percent = r -100+"%";
 		$('<div>').addClass('tree').css({
 			'top':percent,
 			'width':st.treeWidth+'px'
-		}).appendTo('#background');	 
+		}).appendTo('#background');
+		lastTreePos = r;
 	};
 	var resetAll = function(){
 		$('.tree').remove();

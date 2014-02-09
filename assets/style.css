@@ -18,3 +18,8 @@ html,body{height:100%;width:100%;-webkit-user-select:none;}
 	#gameover h1{font-size:100px;color:#EF4621;}
 	#author{position:absolute;right:10px;top:10px;color:#fff;font-size:14px;}
 	#author a{color:#fff;font-weight:bold;}
+
+	#user-list{position:absolute;left:10px;top:140px;list-style:none;}
+	#user-list li{overflow:hidden;color:#fff;}
+		.score{float:left;background:#777;display:block;width:30px;text-align:center;}
+		.ip{float:left;padding:1px 3px;background:rgba(255,255,255,.3)}

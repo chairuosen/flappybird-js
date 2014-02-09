@@ -100,8 +100,8 @@ $(function(){
 			var y = now_y + Math.pow( ( bird_t + q ) ,2) - 100;
 			var _css = y+'px';
 			if ( 
-				y < 0      //太高了
-				||
+				// y < 0      //太高了
+				// ||
 				y > _h  //掉底下
 				||
 				!checkBirdPosition(y)  // 撞树

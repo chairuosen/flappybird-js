@@ -16,3 +16,5 @@ html,body{height:100%;width:100%;-webkit-user-select:none;}
 	#start{position:absolute;left:0;top:0;width:100%;text-align:center;color:#EF4621;font-size:100px;font-weight:bold;}
 	#gameover{position:absolute;color:#fff;width:100%;left:0;top:0;text-align:center;}
 	#gameover h1{font-size:100px;color:#EF4621;}
+	#author{position:absolute;right:10px;top:10px;color:#fff;font-size:14px;}
+	#author a{color:#fff;font-weight:bold;}

@@ -1,17 +1,16 @@
 $(function(){
 	var st = {
-		treeSpeed:4,
-		mainTimeLineInterval:30,
-		creatTreeInterval:60,
-		treeWidth:100,
-		treeHeightParam:30
+		treeSpeed:4,               //障碍(我觉得是树。)移动速度单位 px/帧
+		mainTimeLineInterval:30,   //主时间轴速度  单位 ms/帧
+		creatTreeInterval:60,      //创建障碍的间隔 单位 帧
+		treeWidth:100,             //树宽  单位 px
+		treeHeightDiffLimit:30     //障碍缺口的高度变化限制 单位 屏幕高度%
 	}
 	var $start = $('#start').show();
 	var $gameover = $('#gameover').hide();
 	var lastTreePos;
 	var birdFall = false;
 	var passby = 0;
-
 	var best = window.localStorage.best || 0;
 	var gameOverMark = false;
 	window.t = 0;
@@ -59,7 +58,7 @@ $(function(){
 		}else{
 			$this.hasClass('center')&&updateCounter();
 			$this.removeClass('center');
-			
+
 		}
 		$this.css('left',left - st.treeSpeed);
 	}
@@ -122,10 +121,10 @@ $(function(){
 	var creatTree = function(){
 		var r = parseInt(Math.random()*80) + 10;
 		if(!!lastTreePos){
-			if( r > lastTreePos + st.treeHeightParam )
-				r = lastTreePos + st.treeHeightParam;
-			if( r < lastTreePos - st.treeHeightParam )
-				r = lastTreePos - st.treeHeightParam;
+			if( r > lastTreePos + st.treeHeightDiffLimit )
+				r = lastTreePos + st.treeHeightDiffLimit;
+			if( r < lastTreePos - st.treeHeightDiffLimit )
+				r = lastTreePos - st.treeHeightDiffLimit;
 		}
 		var percent = r -100+"%";
 		$('<div>').addClass('tree').css({

@@ -158,7 +158,7 @@ $(function(){
 		}
 	}).on('resize',function(){
 		setWindow();
-	}).on('tap',function(){
+	}).on('touchstart',function(){
 		if( !gameOverMark ){
 			gameStart();
 			resetBirdSpeed();

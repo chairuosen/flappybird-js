@@ -1,13 +1,13 @@
 html,body{height:100%;width:100%;-webkit-user-select:none;}
 #background{position:absolute;top:0;left:0;z-index:-1;height:100%;width:100%;overflow:hidden;background:#A0D8F1;}
 	.tree{position:absolute;left:100%;top:-50%;height:200%;}
-	.tree:after,.tree:before{content:' ';display:block;position:absolute;left:0;width:100%;height:-webkit-calc( 50% - 100px );height:calc(50% - 100px);
+	.before,.after{display:block;position:absolute;left:0;width:100%;height:-webkit-calc( 50% - 100px );height:calc(50% - 100px);
 	background-color:#14A440;
 	background:-webkit-linear-gradient(left,#42D76F,#14A440);
 	background:-moz-linear-gradient(left,#42D76F,#14A440);
 	background:linear-gradient(left,#42D76F,#14A440);}
-	.tree:after{top:0;}
-	.tree:before{bottom:0;}
+	.after{top:0;}
+	.before{bottom:0;}
 #bird{width:50px;margin:0 auto;height:100%;overflow:hidden;position:relative;z-index:1;}
 	.the-bird{position:absolute;top:50%;left:0;height:40px;width:100%;background:url(bird.png) no-repeat 0 0;background-size:100%;
 	}

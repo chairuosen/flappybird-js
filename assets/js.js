@@ -129,10 +129,13 @@ $(function(){
 				r = lastTreePos - st.treeHeightDiffLimit;
 		}
 		var percent = r -100+"%";
-		$('<div>').addClass('tree').css({
+		var h = _h -100 + 'px';
+		var $div = $('<div>');
+		$div.addClass('tree').css({
 			'top':percent,
 			'width':st.treeWidth+'px'
 		}).appendTo('#background');
+		$div.append('<div class="before" style="height:'+h+'"></div><div class="after" style="height:'+h+'"></div>');
 		lastTreePos = r;
 	};
 	var resetAll = function(){

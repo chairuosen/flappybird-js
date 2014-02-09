@@ -4,7 +4,7 @@ $(function(){
 		mainTimeLineInterval:30,
 		creatTreeInterval:60,
 		treeWidth:100,
-		treeHeightParam:30
+		treeHeightDiffLimit:30
 	}
 	var $start = $('#start').show();
 	var $gameover = $('#gameover').hide();
@@ -121,10 +121,10 @@ $(function(){
 	var creatTree = function(){
 		var r = parseInt(Math.random()*80) + 10;
 		if(!!lastTreePos){
-			if( r > lastTreePos + st.treeHeightParam )
-				r = lastTreePos + st.treeHeightParam;
-			if( r < lastTreePos - st.treeHeightParam )
-				r = lastTreePos - st.treeHeightParam;
+			if( r > lastTreePos + st.treeHeightDiffLimit )
+				r = lastTreePos + st.treeHeightDiffLimit;
+			if( r < lastTreePos - st.treeHeightDiffLimit )
+				r = lastTreePos - st.treeHeightDiffLimit;
 		}
 		var percent = r -100+"%";
 		$('<div>').addClass('tree').css({

@@ -54,9 +54,9 @@ $(function(){
 			&&
 			$this.offset().left < (_w+st.treeWidth)/2 -20//  左边界
 			){
+			!$this.hasClass('center')&&updateCounter();
 			$this.addClass('center');
 		}else{
-			$this.hasClass('center')&&updateCounter();
 			$this.removeClass('center');
 
 		}
@@ -181,13 +181,14 @@ $(function(){
 		socket.emit('heresMyInfo',data);
 	});
 	socket.on('updateAll',function(data){
+		window.u = data;
 		var data = sortUser(data);
 		$('#user-list').html(toListHtml(data));
 	})
 	var sortUser = function(obj){
 		var s = [];
 		for ( var i in obj ){
-			s.push([[i],obj[i].best])
+			s.push([[i],obj[i].best,obj[i].location,obj[i].ip]);
 		}
 		s.sort(function(a,b){
 			return parseInt(b[1]) - parseInt(a[1]);
@@ -196,13 +197,26 @@ $(function(){
 	}
 	var toListHtml = function(data){
 		var html = '';
+		var c =0;
 		for ( var i in data ){
+			c++;
 			var score = data[i][1];
 			var ip = data[i][0][0];
-			html += '<li><span class="score">'+score+'</span><span class="ip">'+ip+'</span></li>';
+			var loc = data[i][2];
+			var theip = data[i][3];
+			html += '<li><span class="score">'+score+'</span><span class="ip">'+loc+' '+theip+'</span></li>';
+			if ( c >29 ){
+				break;
+			}
 		}
 		return html;
 	}
-
+	countObj = function(obj){
+		var c = 0;
+		for ( var i in obj ){
+			c++;
+		}
+		return c;
+	}
 
 });

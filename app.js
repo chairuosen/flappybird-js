@@ -21,20 +21,28 @@ function handler (req, res) {
 var ipArray = {};
 io.sockets.on('connection', function (socket) {
   var updateToAll = function(){
-    io.sockets.emit('updateAll',ipArray);
+    var data = cutObj(ipArray,30);
+    data = ipArray;
+    io.sockets.emit('updateAll',data);
   }
   var g = geo.lookup(socket.handshake.address.address); 
-  var addr = '['+g.country+'/'+g.city+']'+socket.handshake.address.address+':'+socket.handshake.address.port;
+  var location = '['+g.country+'/'+g.city+']';
+  var addr = location+socket.handshake.address.address+':'+socket.handshake.address.port;
   ipArray[addr] = {};
+  ipArray[addr].location = location;
+  ipArray[addr].ip = socket.handshake.address.address;
   socket.emit('giveMeInfo');
   socket.on('heresMyInfo',function(data){
-  	if(typeof data != 'object' )return;
-  	var a = parseInt(data.best) || 0
+  	var a;
+    if(typeof data != 'object' ){
+  		a = 0;
+  	}
+  	a = parseInt(data.best) || 0
   	a = !a? 0:a;
   	a = a<0? 0:a; 
   	a = a>999? 0:a;
-  	if( (a - ipArray[addr].last) >100 )return;
-  	if( a == undefined ) a = 0;
+  	if( (a - ipArray[addr].last) >200 )
+  		a= 0;
     ipArray[addr].best = a;
     ipArray[addr].last = ipArray[addr].best;
     updateToAll();
@@ -44,3 +52,26 @@ io.sockets.on('connection', function (socket) {
     updateToAll();
   });
 });
+
+var sortUser = function(obj){
+	var s = [];
+	for ( var i in obj ){
+		s.push([[i],obj[i].best])
+	}
+	s.sort(function(a,b){
+		return parseInt(b[1]) - parseInt(a[1]);
+	});
+	return s;
+}
+var cutObj = function(obj,count){
+	var newObj = {}
+	var c = 0;
+	for (var i in obj){
+		c++;
+		newObj[i] = obj[i];
+		if ( c == count ){
+			break;
+		}
+	}
+	return newObj;
+}

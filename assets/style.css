@@ -20,6 +20,10 @@ html,body{height:100%;width:100%;-webkit-user-select:none;font-family:Helvetica;
 	#author a{color:#fff;font-weight:bold;}
 
 	#user-list{position:absolute;left:10px;top:140px;list-style:none;}
+	#user-list:before {
+		content: 'Top30';
+		color: #FFF;
+		}
 	#user-list li{overflow:hidden;color:#fff;margin-bottom:2px;}
 		.score{float:left;background:#777;display:block;width:30px;text-align:center;}
 		.ip{float:left;padding:1px 3px;background:rgba(255,255,255,.3)}

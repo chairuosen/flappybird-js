@@ -7,33 +7,38 @@
 <link rel="stylesheet" href="assets/style.css">
 <script src="/socket.io/socket.io.js"></script>
 <script src="assets/zepto.min.js"></script>
-<!--[if lt IE 9]>
-<script src="assets/jquery.min.js"></script>
-<![endif]-->
 <script src='assets/js.js'></script>
+<!--[if IE]>
+	<style>
+	#bird,#text,#background{display:none;}
+	</style>
+<![endif]-->
 </head>
 <body>
-	<section id="background" >
-	</section>
-	<section id="bird">
+	<!--[if IE]>
+	<h1>No IE Thanks</h1>
+	<![endif]-->
+	<div id="background" >
+	</div>
+	<div id="bird">
 		<div class="the-bird"></div>
-	</section>
-	<section id="text">
+	</div>
+	<div id="text">
 		<div id="counter">
 			0
 		</div>
 		<div id="start">Tap Space to Start!</div>
 		<div id="gameover">
 			<h1>Game Over!</h1>
-			<p>Esc重新玩/移动端长按屏幕</p>
-			<p>当前成绩：<span id='thisTime'></span>
+			<p>Esc to restart / longTap on mobile</p>
+			<p>Score：<span id='thisTime'></span>
 			</p>
-			<p>最好成绩：<span id='theBest'></span></p>
+			<p>Best：<span id='theBest'></span></p>
 		</div>
-		<div id="author">Author: <a target="_blank" href="http://ruosen.io/">Ruosen</a></div>
+		<div id="author">Author: <a target="_blank" href="http://ruosen.io/">Ruosen</a><br/>on <a href='https://github.com/chairuosen/FlappyBird-By-JS'>GitHub</a></div>
 		<ul id="user-list">
 			
 		</ul>
-	</section>
+	</div>
 </body>
 </html>

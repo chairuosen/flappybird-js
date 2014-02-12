@@ -20,11 +20,17 @@ function handler (req, res) {
 }
 var ipArray = {};
 io.sockets.on('connection', function (socket) {
+
   var updateToAll = function(){
-    var data = cutObj(ipArray,30);
-    data = ipArray;
+    var data = {};
+    data.type = 1;
+    var sortRes = sortUser(ipArray);
+    var array_tmp = sortRes.obj;
+    data.total = sortRes.total;
+    data.array = cutArray(array_tmp,30);
     io.sockets.emit('updateAll',data);
   }
+
   var g = geo.lookup(socket.handshake.address.address); 
   var location = '['+g.country+'/'+g.city+']';
   var addr = location+socket.handshake.address.address+':'+socket.handshake.address.port;
@@ -47,31 +53,49 @@ io.sockets.on('connection', function (socket) {
     ipArray[addr].last = ipArray[addr].best;
     updateToAll();
   });
+
+  var toastStr = '公告';
+  socket.emit('toast',{type:false,str:toastStr});
+
   socket.on('disconnect', function() {
     delete ipArray[addr];
     updateToAll();
   });
 });
-
 var sortUser = function(obj){
-	var s = [];
-	for ( var i in obj ){
-		s.push([[i],obj[i].best])
-	}
-	s.sort(function(a,b){
-		return parseInt(b[1]) - parseInt(a[1]);
-	});
-	return s;
+  var s = [];
+  for ( var i in obj ){
+    s.push([
+      i,
+      obj[i].best||0,
+      obj[i].location,
+      obj[i].ip
+      ]);
+  }
+  s.sort(function(a,b){
+    return parseInt(b[1]) - parseInt(a[1]);
+  });
+  return {
+    obj:s,
+    total:countObj(obj)
+  };
 }
-var cutObj = function(obj,count){
-	var newObj = {}
-	var c = 0;
-	for (var i in obj){
-		c++;
-		newObj[i] = obj[i];
-		if ( c == count ){
-			break;
-		}
-	}
-	return newObj;
+var cutArray = function(arr,count){
+  var newArray = [];
+  var c = 0;
+  for (var i in arr){
+    c++;
+    newArray.push(arr[i])
+    if ( c == count ){
+      break;
+    }
+  }
+  return newArray;
+}
+var countObj = function(obj){
+  var c = 0;
+  for ( var i in obj ){
+    c++;
+  }
+  return c;
 }

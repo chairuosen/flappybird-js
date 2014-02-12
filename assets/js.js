@@ -174,7 +174,7 @@ $(function(){
 
 	// SOCKET.IO
 	//   - - # 作弊可耻，看什么看，就是你！
-	var socket = io.connect('106.187.94.91:8899');
+	window.socket = io.connect('106.187.94.91:8899');
 	socket.on('giveMeInfo',function(){
 		var data = {};
 		data.best = localStorage.best || 0;
@@ -182,13 +182,33 @@ $(function(){
 	});
 	socket.on('updateAll',function(data){
 		window.u = data;
-		var data = sortUser(data);
-		$('#user-list').html(toListHtml(data));
+		if ( !!data.type && data.type == 1 ){
+			$('#user-list').html(toListHtml(data.array));
+			$('#user-list').attr('total',data.total);
+		}else{
+			var data = sortUser(data);
+			$('#user-list').html(toListHtml(data));
+		}
+	});
+	socket.on('toast',function(data){
+		if( typeof(data.type) == 'boolean'){
+			$.Toast(data.type,data.str);
+		}else{
+			$.Toast(false);
+		}
+	})
+	socket.on('reconnect_failed', function () {
+		$.flashToast('服务器上厕所去啦!',2000);
 	})
 	var sortUser = function(obj){
 		var s = [];
 		for ( var i in obj ){
-			s.push([[i],obj[i].best,obj[i].location,obj[i].ip]);
+			s.push([
+				i,
+				obj[i].best||0,
+				obj[i].location,
+				obj[i].ip
+				]);
 		}
 		s.sort(function(a,b){
 			return parseInt(b[1]) - parseInt(a[1]);
@@ -201,10 +221,9 @@ $(function(){
 		for ( var i in data ){
 			c++;
 			var score = data[i][1];
-			var ip = data[i][0][0];
 			var loc = data[i][2];
 			var theip = data[i][3];
-			html += '<li><span class="score">'+score+'</span><span class="ip">'+loc+' '+theip+'</span></li>';
+			html += '<li><span class="score">'+score+'</span><span class="ip"><span class="city">'+loc+'</span> '+theip+'</span></li>';
 			if ( c >29 ){
 				break;
 			}
@@ -217,6 +236,21 @@ $(function(){
 			c++;
 		}
 		return c;
+	}
+	$.Toast = function(type,str){
+		var str = str || '';
+		var $div = $('#toast');
+		if(type){
+			$div.text(str).show();
+		}else{
+			$div.empty().hide();
+		}
+	}
+	$.flashToast = function(str,t){
+		$.Toast(true,str);
+		setTimeout(function(){
+			$.Toast(false);
+		},t);
 	}
 
 });

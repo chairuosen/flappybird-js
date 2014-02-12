@@ -24,6 +24,25 @@ html,body{height:100%;width:100%;-webkit-user-select:none;font-family:Helvetica;
 		content: 'Top30';
 		color: #FFF;
 		}
+	#user-list:after {
+		content: 'online:'attr(total);
+		display: block;
+		position: absolute;
+		top: 0;
+		left: 100px;
+		color: #FFF;
+		}
 	#user-list li{overflow:hidden;color:#fff;margin-bottom:2px;}
 		.score{float:left;background:#777;display:block;width:30px;text-align:center;}
-		.ip{float:left;padding:1px 3px;background:rgba(255,255,255,.3)}
+		.city{color:#666;}
+		.ip{float:left;padding:1px 3px;background:rgba(0,0,0,.1)}
+	#toast {
+		position: absolute;
+		display:none;
+		top: 122px;
+		left: 50px;
+		background: #E55;
+		padding: 2px 5px;
+		color: #FFF;
+		box-shadow: 1px 1px #333;
+		}

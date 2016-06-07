@@ -1,0 +1,23 @@
+{
+  "name": "flappybird-by-js",
+  "version": "1.0.0",
+  "description": "FlappyBird-By-JS ================ ##需要:",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chairuosen/FlappyBird-By-JS.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chairuosen/FlappyBird-By-JS/issues"
+  },
+  "homepage": "https://github.com/chairuosen/FlappyBird-By-JS#readme",
+  "devDependencies": {
+    "geoip-lite": "^1.1.8",
+    "socket.io": "^1.0.4"
+  }
+}

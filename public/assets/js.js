@@ -174,7 +174,7 @@ $(function(){
 
 	// SOCKET.IO
 	//   - - # 作弊可耻，看什么看，就是你！
-	window.socket = io.connect('106.187.94.91:8899');
+	window.socket = io.connect(window.location.host+':8899');
 	socket.on('giveMeInfo',function(){
 		var data = {};
 		data.best = localStorage.best || 0;
